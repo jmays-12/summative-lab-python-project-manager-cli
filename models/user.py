@@ -1,14 +1,25 @@
 import re
+from .project import Project
 
 
 class User:
-
+    _all = []
     # basic regex pattern to validate email addresses
     EMAIL_PATTERN = r"^[^@\s]+@[^@\s]+\.[^@\s]+$"
 
     def __init__(self, name, email):
         self.name = name
         self.email = email
+        self.projects = []
+        User._all.append(self)
+
+    @classmethod
+    def all(cls):
+        return cls.all
+
+    @classmethod
+    def find_by_name(cls, name):
+        return next((user for user in cls._all if user.name == name), None)
 
     @property
     def name(self):
@@ -46,3 +57,8 @@ class User:
             raise ValueError("Invalid email format")
 
         self._email = value
+
+    def add_project(self, project):
+        if not hasattr(project, "title") or not hasattr(project, "description"):
+            raise TypeError("Expected a Project instance")
+        self.projects.append(project)

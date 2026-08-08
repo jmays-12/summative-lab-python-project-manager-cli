@@ -1,4 +1,5 @@
 from datetime import date
+from .task import Task
 
 
 class Project:
@@ -6,6 +7,7 @@ class Project:
         self.title = title
         self.description = description
         self.due_date = due_date
+        self.tasks = []
 
     @property
     def title(self):
@@ -49,3 +51,8 @@ class Project:
                 "Due date must be a date or left unspecified for no due date")
 
         self._due_date = value
+
+    def add_task(self, task):
+        if not hasattr(task, "title") or not hasattr(task, "status"):
+            raise TypeError("Expected a Task instance")
+        self.tasks.append(task)
