@@ -13,12 +13,14 @@ class Task:
 
     @title.setter
     def title(self, value):
-        # title can only be assigned to a string, and must not be empty
+        # Task title can only be assigned to a string, and must not be empty
         if not isinstance(value, str):
-            raise TypeError("Title must be a string")
+            raise TypeError("Task title must be a string")
 
-        if not value.strip():
-            raise ValueError("Title cannot be empty")
+        value = value.strip()
+
+        if not value:
+            raise ValueError("Task title cannot be empty")
 
         self._title = value
 
@@ -46,9 +48,17 @@ class Task:
         # allow task to be assigned to no one
         if assignee is None:
             self._assigned_to = None
-        # allow task to be assigned to user ID
-        elif isinstance(assignee, int) and assignee > 0:
-            self._assigned_to = assignee
+
+        # allow task to be assigned to a user's name
+        elif isinstance(assignee, str):
+            if not assignee.strip():
+                raise ValueError(
+                    "Assigned user name cannot be blank. "
+                    "Omit this argument if the task should be unassigned."
+                )
+
+            self._assigned_to = assignee.strip()
+
         else:
             raise TypeError(
-                "User ID must be a positive integer or left empty.")
+                "Assigned user name must be a string or left unspecified for no assignment")

@@ -9,11 +9,12 @@ Add any number of tasks to a project, and any number of projects to a user.
 * Tracks user, project and task data.
 * Persistent data storage using JSON
 * Interactive CLI with focus on readability and ease of use
+* Input validation (due date being valid date, email address regex test)
 
 ## Requirements
 
 * Python
-* Rich
+* rich
 * pytest
 
 ## Running
