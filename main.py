@@ -21,7 +21,7 @@ def print_help():
     help_text = Text()
 
     help_text.append(
-        "Here are the command categories you can use to get started:\n", style="bold yellow")
+        "Available commands\n", style="yellow")
 
     help_text.append("User:\n", style="yellow")
     help_text.append("  add-user", style="green")
