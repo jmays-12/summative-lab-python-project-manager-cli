@@ -62,3 +62,13 @@ class Task:
         else:
             raise TypeError(
                 "Assigned user name must be a string or left unspecified for no assignment")
+
+    def __str__(self):
+        return f"{self.title} [{self.status}]"
+
+    def __repr__(self):
+        return (
+            f"Task(title={self.title!r}, "
+            f"status={self.status!r}, "
+            f"assigned_to={self.assigned_to!r})"
+        )

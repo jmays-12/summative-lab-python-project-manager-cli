@@ -15,11 +15,12 @@ class Project:
 
     @title.setter
     def title(self, value):
-        # Project title can only be assigned to a string, and must not be empty
         if not isinstance(value, str):
             raise TypeError("Project title must be a string")
 
-        if not value.strip():
+        value = value.strip()
+
+        if not value:
             raise ValueError("Project title cannot be empty")
 
         self._title = value
@@ -30,11 +31,12 @@ class Project:
 
     @description.setter
     def description(self, value):
-        # Project description can only be assigned to a string, and must not be empty
         if not isinstance(value, str):
             raise TypeError("Project description must be a string")
 
-        if not value.strip():
+        value = value.strip()
+
+        if not value:
             raise ValueError("Project description cannot be empty")
 
         self._description = value
@@ -45,14 +47,25 @@ class Project:
 
     @due_date.setter
     def due_date(self, value):
-        # Project due date must be a date or None
         if value is not None and not isinstance(value, date):
             raise TypeError(
-                "Due date must be a date or left unspecified for no due date")
+                "Due date must be a date or left unspecified for no due date"
+            )
 
         self._due_date = value
 
     def add_task(self, task):
-        if not hasattr(task, "title") or not hasattr(task, "status"):
+        if not isinstance(task, Task):
             raise TypeError("Expected a Task instance")
+
         self.tasks.append(task)
+
+    def __str__(self):
+        return self.title
+
+    def __repr__(self):
+        return (
+            f"Project(title={self.title!r}, "
+            f"description={self.description!r}, "
+            f"due_date={self.due_date!r})"
+        )
