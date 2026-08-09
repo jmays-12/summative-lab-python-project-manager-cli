@@ -3,7 +3,7 @@ from datetime import datetime
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent
-DATA_FILE = PROJECT_ROOT / "data" / "data.json"
+DATA_FILE = PROJECT_ROOT / "data" / "app_data.json"
 
 
 def load_data():
